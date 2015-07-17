@@ -1,2 +1,4 @@
 .idea
 congobay.iml
+.gradle
+build
