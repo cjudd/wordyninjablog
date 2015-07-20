@@ -1,4 +1,4 @@
-package biz.congobay.web;
+package ninja.wordy.blog.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

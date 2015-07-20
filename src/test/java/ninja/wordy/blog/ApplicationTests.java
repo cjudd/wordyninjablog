@@ -1,4 +1,4 @@
-package biz.congobay;
+package ninja.wordy.blog;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

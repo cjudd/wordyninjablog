@@ -1,5 +1,5 @@
-create database congobay;
-CREATE USER 'congobay'@'localhost' IDENTIFIED BY 'congobay';
-GRANT ALL PRIVILEGES ON congobay.* TO 'congobay'@'localhost';
+create database wordyninjablog;
+CREATE USER 'wordyninja'@'localhost' IDENTIFIED BY 'wordyninja';
+GRANT ALL PRIVILEGES ON wordyninjablog.* TO 'wordyninja'@'localhost';
 FLUSH PRIVILEGES;
 
