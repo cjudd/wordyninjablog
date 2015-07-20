@@ -13,7 +13,7 @@
   </div>
   <div class="form-group" <c:if test="${requestScope['org.springframework.validation.BindingResult.post'].hasFieldErrors('content')}">has-error</c:if>>
     <form:label path="content">Content:</form:label>
-    <form:input path="content" cssClass="form-control" />
+    <form:textarea path="content" cssClass="form-control" rows="5" cols="30" />
     <form:errors path="content" cssClass="control-label" />
   </div>
   <input type="submit" value="submit" class="btn btn-default" />
