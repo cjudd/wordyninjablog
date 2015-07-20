@@ -15,7 +15,7 @@
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-  <link href="css/blog-home.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/css/blog-home.css" rel="stylesheet">
 
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -45,14 +45,14 @@
     <div class="collapse navbar-collapse" id="main-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a href="/signup">Sign Up</a>
+          <a href="${pageContext.request.contextPath}/signup">Sign Up</a>
         </li>
         <li>
           <c:choose>
             <c:when test="${pageContext.request.userPrincipal.authenticated}">
-              <a href="/logout">Logout</a>
+              <a href="${pageContext.request.contextPath}/logout">Logout</a>
             </c:when>
-            <c:otherwise><a href="/login">Log In</a></c:otherwise>
+            <c:otherwise><a href="${pageContext.request.contextPath}/login">Log In</a></c:otherwise>
           </c:choose>
 
         </li>
