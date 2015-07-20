@@ -57,7 +57,36 @@
 
 <div class="container">
 
-  <sitemesh:write property="body" />
+  <div class="row">
+
+    <div class="col-md-8">
+      <sitemesh:write property="body" />
+    </div>
+
+    <!-- side bar column -->
+    <div class="col-md-4">
+
+      <div class="well">
+        <h4>Blog Search</h4>
+        <div class="input-group">
+          <input type="text" class="form-control">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-search"></span>
+              </button>
+          </span>
+        </div>
+      </div>
+
+      <div class="well">
+        <h4>Ads</h4>
+        <p>This is the porition of the site where we monetize.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <hr>
 
   <footer>
     <div class="row">
