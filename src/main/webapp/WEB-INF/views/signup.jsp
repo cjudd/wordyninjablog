@@ -13,7 +13,7 @@
   </div>
   <div class="form-group <c:if test="${requestScope['org.springframework.validation.BindingResult.user'].hasFieldErrors('password')}">has-error</c:if>">
     <form:label path="password">Password:</form:label>
-    <form:input path="password" cssClass="form-control" />
+    <form:input path="password" type="password" cssClass="form-control" />
     <form:errors path="password" cssClass="control-label" />
   </div>
   <div class="form-group" <c:if test="${requestScope['org.springframework.validation.BindingResult.user'].hasFieldErrors('firstName')}">has-error</c:if>>
