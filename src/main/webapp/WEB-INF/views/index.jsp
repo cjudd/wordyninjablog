@@ -17,7 +17,7 @@
                                                                              dateStyle="long" timeStyle="long"
                                                                              value="${post.createdDate}" /></p>
 <hr>
-<img class="img-responsive" src="http://placehold.it/900x300" alt="">
+<img class="img-responsive" src="http://lorempixel.com/900/300/" alt="">
 <hr>
 <p>${post.content}</p>
 <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
