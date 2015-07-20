@@ -55,7 +55,7 @@
               </sec:authorize>
               <sec:authorize access="hasRole('ROLE_BLOGGER')">
                 <li>
-                  <a href="${pageContext.request.contextPath}/manage">Manage</a>
+                  <a href="${pageContext.request.contextPath}/post">Post</a>
                 </li>
               </sec:authorize>
               <li>
