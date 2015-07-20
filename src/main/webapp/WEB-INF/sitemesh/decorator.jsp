@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <html lang="en">
 <head>
@@ -44,18 +45,33 @@
     </div>
     <div class="collapse navbar-collapse" id="main-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a href="${pageContext.request.contextPath}/signup">Sign Up</a>
-        </li>
-        <li>
+
           <c:choose>
             <c:when test="${pageContext.request.userPrincipal.authenticated}">
-              <a href="${pageContext.request.contextPath}/logout">Logout</a>
+              <sec:authorize access="hasRole('ROLE_ADMIN')">
+                <li>
+                  <a href="${pageContext.request.contextPath}/admin">Administration</a>
+                </li>
+              </sec:authorize>
+              <sec:authorize access="hasRole('ROLE_BLOGGER')">
+                <li>
+                  <a href="${pageContext.request.contextPath}/manage">Manage</a>
+                </li>
+              </sec:authorize>
+              <li>
+                <a href="${pageContext.request.contextPath}/logout">Logout</a>
+              </li>
             </c:when>
-            <c:otherwise><a href="${pageContext.request.contextPath}/login">Log In</a></c:otherwise>
+            <c:otherwise>
+              <li>
+                <a href="${pageContext.request.contextPath}/signup">Sign Up</a>
+              </li>
+              <li>
+                <a href="${pageContext.request.contextPath}/login">Log In</a>
+              </li>
+            </c:otherwise>
           </c:choose>
 
-        </li>
       </ul>
     </div>
   </div>

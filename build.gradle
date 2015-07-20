@@ -43,6 +43,7 @@ dependencies {
 
     compile("org.apache.tomcat.embed:tomcat-embed-jasper")
     compile("javax.servlet:jstl")
+    compile("org.springframework.security:spring-security-taglibs:3.2.7.RELEASE")
     compile("org.sitemesh:sitemesh:3.0.0")
 
     compile("mysql:mysql-connector-java:5.1.36")
