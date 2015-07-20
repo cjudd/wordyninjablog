@@ -1,9 +1,13 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <h1 class="page-header">
   Most Resent Posts
 </h1>
 
+<c:forEach var="post" items="${posts}">
+
 <h2>
-  <a href="#">Blog Post Title</a>
+  <a href="#">${post.title}</a>
 </h2>
 <p class="lead">
   by <a href="index.php">Start Bootstrap</a>
@@ -16,3 +20,4 @@
 <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
 <hr>
+</c:forEach>
