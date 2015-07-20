@@ -45,7 +45,7 @@
     <div class="collapse navbar-collapse" id="main-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a href="#">Sign Up</a>
+          <a href="/signup">Sign Up</a>
         </li>
         <li>
           <c:choose>
