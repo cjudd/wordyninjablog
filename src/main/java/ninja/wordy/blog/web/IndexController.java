@@ -5,6 +5,7 @@ import ninja.wordy.blog.repository.PostRepository;
 import ninja.wordy.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,6 +27,9 @@ public class IndexController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @RequestMapping({"", "/", "/index"})
     public ModelAndView index () {
@@ -66,7 +70,7 @@ public class IndexController {
             return "signup";
         } else {
             redirectAttrs.addFlashAttribute("message", "User successfully added...");
-            user.setPassword(new Md5PasswordEncoder().encodePassword(user.getPassword(), ""));
+            user.setPassword(passwordEncoder.encodePassword(user.getPassword(), ""));
             userRepository.save(user);
         }
         redirectAttrs.addFlashAttribute(user);
