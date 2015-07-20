@@ -45,7 +45,7 @@ dependencies {
     compile("javax.servlet:jstl")
     compile("org.sitemesh:sitemesh:3.0.0")
 
-    compile("mysql:mysql-connector-java")
+    compile("mysql:mysql-connector-java:5.1.36")
 
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
