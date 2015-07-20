@@ -4,6 +4,8 @@ import ninja.wordy.blog.model.User;
 import ninja.wordy.blog.repository.PostRepository;
 import ninja.wordy.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -35,7 +37,8 @@ public class IndexController {
     public ModelAndView index () {
         ModelAndView mav = new ModelAndView("index");
 
-        mav.addObject("posts", postRepository.findAll());
+        Pageable pageable = new PageRequest(0, 10);
+        mav.addObject("posts", postRepository.findMostRecentPosts(pageable));
 
         return mav;
     }
