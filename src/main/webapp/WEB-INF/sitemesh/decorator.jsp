@@ -48,7 +48,13 @@
           <a href="#">Sign Up</a>
         </li>
         <li>
-          <a href="#">Log In</a>
+          <c:choose>
+            <c:when test="${pageContext.request.userPrincipal.authenticated}">
+              <a href="/logout">Logout</a>
+            </c:when>
+            <c:otherwise><a href="/login">Log In</a></c:otherwise>
+          </c:choose>
+
         </li>
       </ul>
     </div>
