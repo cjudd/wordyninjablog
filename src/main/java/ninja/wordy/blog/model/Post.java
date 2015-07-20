@@ -1,6 +1,7 @@
 package ninja.wordy.blog.model;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 public class Post {
@@ -14,6 +15,8 @@ public class Post {
 
     @Column(length=5000)
     private String content;
+
+    private Timestamp createdDate;
 
     public long getId() {
         return id;
@@ -33,5 +36,13 @@ public class Post {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Timestamp getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Timestamp createdDate) {
+        this.createdDate = createdDate;
     }
 }
