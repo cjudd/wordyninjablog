@@ -1,11 +1,16 @@
 package ninja.wordy.blog.web;
 
+import ninja.wordy.blog.model.Post;
 import ninja.wordy.blog.model.User;
 import ninja.wordy.blog.repository.PostRepository;
 import ninja.wordy.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowCallbackHandler;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -17,6 +22,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -33,12 +42,22 @@ public class IndexController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
     @RequestMapping({"", "/", "/index"})
-    public ModelAndView index () {
+    public ModelAndView index(@RequestParam(required = false) String searchTerm) {
         ModelAndView mav = new ModelAndView("index");
 
-        Pageable pageable = new PageRequest(0, 10);
-        mav.addObject("posts", postRepository.findMostRecentPosts(pageable));
+        List<Post> posts = null;
+        if(searchTerm != null) {
+            System.out.println("search term " + searchTerm);
+            posts = search(searchTerm);
+        } else {
+            Pageable pageable = new PageRequest(0, 10);
+            posts = postRepository.findMostRecentPosts(pageable);
+        }
+        mav.addObject("posts", posts);
 
         return mav;
     }
@@ -79,6 +98,10 @@ public class IndexController {
         redirectAttrs.addFlashAttribute(user);
 
         return "redirect:/";
+    }
+
+    private List<Post> search(String searchTerm) {
+        return jdbcTemplate.query("select * from post where title like '%" + searchTerm + "%'", new BeanPropertyRowMapper<>(Post.class));
     }
 
 }

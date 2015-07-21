@@ -2,6 +2,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html lang="en">
 <head>
@@ -90,14 +91,16 @@
 
       <div class="well">
         <h4>Blog Search</h4>
-        <div class="input-group">
-          <input type="text" class="form-control">
+        <form:form method="POST" commandName="post">
+          <div class="input-group">
+            <input name="searchTerm" type="text" class="form-control">
             <span class="input-group-btn">
               <button class="btn btn-default" type="button">
                 <span class="glyphicon glyphicon-search"></span>
               </button>
-          </span>
-        </div>
+            </span>
+          </div>
+        </form:form>
       </div>
 
       <div class="well">
