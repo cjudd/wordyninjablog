@@ -91,7 +91,7 @@
 
       <div class="well">
         <h4>Blog Search</h4>
-        <form:form method="POST" commandName="post">
+        <form:form action="search" method="POST">
           <div class="input-group">
             <input name="searchTerm" type="text" class="form-control">
             <span class="input-group-btn">

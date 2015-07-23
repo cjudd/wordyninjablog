@@ -45,7 +45,7 @@ public class IndexController {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    @RequestMapping({"", "/", "/index"})
+    @RequestMapping({"", "/", "/index", "/results"})
     public ModelAndView index(@RequestParam(required = false) String searchTerm) {
         ModelAndView mav = new ModelAndView("index");
 
@@ -77,6 +77,11 @@ public class IndexController {
         }
 
         return mav;
+    }
+
+    @RequestMapping(value={"/search"}, method = POST)
+    public String searchPost(@RequestParam(required = false) String searchTerm) {
+        return "redirect:/results?searchTerm=" + searchTerm;
     }
 
     @RequestMapping(value="/signup", method = GET)
