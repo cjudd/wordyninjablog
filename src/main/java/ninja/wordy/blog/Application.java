@@ -11,7 +11,7 @@ import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletCon
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class Application extends SpringBootServletInitializer /* implements EmbeddedServletContainerCustomizer */ {
+public class Application extends SpringBootServletInitializer /* implements EmbeddedServletContainerCustomizer */ /* TODO: uncomment to disable httponly cookies */ {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -22,6 +22,7 @@ public class Application extends SpringBootServletInitializer /* implements Embe
         return application.sources(Application.class);
     }
 
+/* TODO: uncomment to disable httponly cookies */
 //    @Override
 //    public void customize(final ConfigurableEmbeddedServletContainer container) {
 //        ((TomcatEmbeddedServletContainerFactory) container).addContextCustomizers(new TomcatContextCustomizer() {
