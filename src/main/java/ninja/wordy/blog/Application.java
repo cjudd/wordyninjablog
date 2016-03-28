@@ -1,6 +1,7 @@
 package ninja.wordy.blog;
 
 import org.apache.catalina.Context;
+import org.hdiv.config.annotation.ExclusionRegistry;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -9,6 +10,8 @@ import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomi
 import org.springframework.boot.context.embedded.tomcat.TomcatContextCustomizer;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
+import org.springframework.context.annotation.Bean;
+import org.hdiv.config.annotation.configuration.HdivWebSecurityConfigurerAdapter;
 
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer implements EmbeddedServletContainerCustomizer  /* TODO: uncomment to disable httponly cookies */ {
@@ -33,4 +36,16 @@ public class Application extends SpringBootServletInitializer implements Embedde
         });
     }
 
+    @Bean
+    public ApplicationWebSecurity applicationWebSecurity() {
+        return new ApplicationWebSecurity();
+    }
+
+    protected static class ApplicationWebSecurity extends HdivWebSecurityConfigurerAdapter {
+
+        @Override
+        public void addExclusions(ExclusionRegistry registry) {
+            registry.addUrlExclusions("/login","/signup","/search","/post");
+        }
+    }
 }

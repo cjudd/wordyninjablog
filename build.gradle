@@ -48,6 +48,9 @@ dependencies {
 
     compile("mysql:mysql-connector-java:5.1.36")
 
+    compile("org.hdiv:spring-boot-starter-hdiv-thymeleaf:1.0.1")
+
+
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
