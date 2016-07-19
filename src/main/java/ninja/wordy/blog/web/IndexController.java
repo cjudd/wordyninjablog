@@ -26,6 +26,7 @@ import javax.validation.Valid;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.UUID;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -101,6 +102,14 @@ public class IndexController {
             userRepository.save(user);
         }
         redirectAttrs.addFlashAttribute(user);
+
+        return "redirect:/";
+    }
+
+    @RequestMapping(value="/uuid", method = GET)
+    public String uuid(@ModelAttribute("uuid")String uuid) {
+
+        UUID.fromString(uuid);
 
         return "redirect:/";
     }
