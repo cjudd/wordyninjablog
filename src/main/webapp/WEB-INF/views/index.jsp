@@ -2,7 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <h1 class="page-header">
-  Most Resent Posts
+  Most Recent Posts
 </h1>
 
 <c:forEach var="post" items="${posts}">
