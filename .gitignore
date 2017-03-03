@@ -2,3 +2,7 @@
 wordyninjablog.iml
 .gradle
 build
+bin
+.classpath
+.project
+.settings
