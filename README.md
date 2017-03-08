@@ -30,5 +30,5 @@ docker run --name wordyninjadb \
     -e MYSQL_USER=wordyninja \
     -e MYSQL_PASSWORD=wordyninja+1 \
     -d mysql:latest
-docker run -p 8080:8080 --link wordyninjadb:mysql  -it --rm javajudd/wordyninjablog:latest
+docker run -p 8080:8080 --link wordyninjadb:mysql -it javajudd/wordyninjablog:latest
 ```
