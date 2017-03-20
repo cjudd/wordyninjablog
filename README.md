@@ -11,6 +11,7 @@ To run the application locally, you need to have mysql installed and create a da
 mysql -e "create database wordyninjablog"
 mysql -e "CREATE USER 'wordyninja'@'%' IDENTIFIED BY 'wordyninja+1';"
 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'wordyninja'@'%'"
+mysql -e "flush privileges"
 ```
 
 You can build and run the project on the command-line using:
