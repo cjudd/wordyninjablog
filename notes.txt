@@ -1,1 +1,2 @@
 docker run --name wordyninjablog -e MYSQL_DATABASE=wordyninjablog -e MYSQL_ROOT_PASSWORD=root+1 -p 3306:3306 -d mysql:5.5.44
+docker run -p 8080:8080 --link wordyninjadb:mysql  -it --rm javajudd/wordyninjablog:latest
