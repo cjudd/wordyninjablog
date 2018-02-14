@@ -25,11 +25,12 @@ Or you can build and run a docker image using:
 
 ```
 ./gradlew build buildDocker
-docker run --name wordyninjadb \
+docker run --name wordyninja_db \
     -e MYSQL_ROOT_PASSWORD=root+1 \
     -e MYSQL_DATABASE=wordyninjablog \
     -e MYSQL_USER=wordyninja \
     -e MYSQL_PASSWORD=wordyninja+1 \
+    -p 3306:3306 \
     -d mysql:latest
-docker run -p 8080:8080 --link wordyninjadb:mysql -it javajudd/wordyninjablog:latest
+docker run -p 8080:8080 --link wordyninja_db:mysql -it javajudd/wordyninjablog:latest
 ```
