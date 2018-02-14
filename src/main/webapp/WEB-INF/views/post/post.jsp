@@ -7,7 +7,7 @@
 
 <form:form method="POST" commandName="post">
   <div class="form-group <c:if test="${requestScope['org.springframework.validation.BindingResult.post'].hasFieldErrors('title')}">has-error</c:if>">
-    <form:label path="title" cssClass="control-label" >title:</form:label>
+    <form:label path="title" cssClass="control-label" >Title:</form:label>
     <form:input path="title" cssClass="form-control" />
     <form:errors path="title" cssClass="control-label" />
   </div>
@@ -16,7 +16,7 @@
     <form:textarea path="content" cssClass="form-control" rows="5" cols="30" />
     <form:errors path="content" cssClass="control-label" />
   </div>
-  <input type="submit" value="submit" class="btn btn-default" />
+  <input type="submit" value="Submit" class="btn btn-default" />
   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form:form>
 
