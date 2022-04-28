@@ -77,8 +77,8 @@ public class IndexController {
     }
 
     @RequestMapping(value={"/search"}, method = POST)
-    public String searchPost(@RequestParam(required = false) String searchTerm) {
-        return "redirect:/results?searchTerm=" + searchTerm;
+    public ModelAndView searchPost(@RequestParam(required = false) String searchTerm) {
+        return new ModelAndView("redirect:/results?searchTerm=" + searchTerm);
     }
 
     @RequestMapping(value="/signup", method = GET)
@@ -89,9 +89,9 @@ public class IndexController {
     }
 
     @RequestMapping(value="/signup", method = POST)
-    public String signupPost(@ModelAttribute("user")@Valid User user, final BindingResult result, final RedirectAttributes redirectAttrs) {
+    public ModelAndView signupPost(@ModelAttribute("user")@Valid User user, final BindingResult result, final RedirectAttributes redirectAttrs) {
         if(result.hasErrors()) {
-            return "signup";
+            return new ModelAndView("signup");
         } else {
             redirectAttrs.addFlashAttribute("message", "User successfully added...");
             user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -99,15 +99,15 @@ public class IndexController {
         }
         redirectAttrs.addFlashAttribute(user);
 
-        return "redirect:/";
+        return new ModelAndView("redirect:/");
     }
 
     @RequestMapping(value="/uuid", method = GET)
-    public String uuid(@ModelAttribute("uuid")String uuid) {
+    public ModelAndView uuid(@ModelAttribute("uuid")String uuid) {
 
         UUID.fromString(uuid);
 
-        return "redirect:/";
+        return new ModelAndView("redirect:/");
     }
 
     private List<Post> search(String searchTerm) {
