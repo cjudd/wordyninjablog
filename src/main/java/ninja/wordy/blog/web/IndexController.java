@@ -9,29 +9,25 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowCallbackHandler;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
-import org.springframework.security.authentication.encoding.PasswordEncoder;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-@Controller
+@RestController
 public class IndexController {
 
     @Autowired
@@ -46,7 +42,7 @@ public class IndexController {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    @RequestMapping({"", "/", "/index", "/results"})
+    @GetMapping({"", "/", "/index", "/results"})
     public ModelAndView index(@RequestParam(required = false) String searchTerm) {
         ModelAndView mav = new ModelAndView("index");
 
@@ -55,7 +51,7 @@ public class IndexController {
             System.out.println("search term " + searchTerm);
             posts = search(searchTerm);
         } else {
-            Pageable pageable = new PageRequest(0, 10);
+            Pageable pageable = PageRequest.of(0, 10);
             posts = postRepository.findMostRecentPosts(pageable);
         }
         mav.addObject("posts", posts);
@@ -88,7 +84,7 @@ public class IndexController {
     @RequestMapping(value="/signup", method = GET)
     public ModelAndView signup(User user) {
         ModelAndView mav = new ModelAndView("signup");
-
+        mav.addObject("user", new User());
         return mav;
     }
 
@@ -98,7 +94,7 @@ public class IndexController {
             return "signup";
         } else {
             redirectAttrs.addFlashAttribute("message", "User successfully added...");
-            user.setPassword(passwordEncoder.encodePassword(user.getPassword(), ""));
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
         }
         redirectAttrs.addFlashAttribute(user);

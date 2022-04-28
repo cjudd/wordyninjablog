@@ -5,7 +5,7 @@
   New Post
 </h1>
 
-<form:form method="POST" commandName="post">
+<form:form method="POST" modelAttribute="post">
   <div class="form-group <c:if test="${requestScope['org.springframework.validation.BindingResult.post'].hasFieldErrors('title')}">has-error</c:if>">
     <form:label path="title" cssClass="control-label" >Title:</form:label>
     <form:input path="title" cssClass="form-control" />

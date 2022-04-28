@@ -1,87 +1,42 @@
-buildscript {
-    ext {
-        springBootVersion = '1.2.5.RELEASE'
-    }
-    repositories {
-        mavenCentral()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
-        classpath("io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE")
-        classpath('se.transmode.gradle:gradle-docker:1.2')
-        classpath("gradle.plugin.com.boxfuse.client:flyway-release:4.1.1")
-    }
+plugins {
+  id 'org.springframework.boot' version '2.6.7'
+  id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+  id 'java'
+  id 'war'
 }
 
-apply plugin: 'java'
-apply plugin: 'war'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'spring-boot' 
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'docker'
-apply plugin: 'org.flywaydb.flyway'
-
-group = 'javajudd'
-
-
-jar {
-    baseName = 'wordyninjablog'
-    version = '0.0.1-SNAPSHOT'
-}
+group = 'net.javajudd'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
 
 configurations {
-    providedRuntime
+  compileOnly {
+    extendsFrom annotationProcessor
+  }
 }
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
-
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-data-jpa")
-    compile("org.springframework.boot:spring-boot-starter-security")
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-starter-tomcat")
-
-    compile("org.apache.tomcat.embed:tomcat-embed-jasper")
-    compile("javax.servlet:jstl")
-    compile("org.springframework.security:spring-security-taglibs:3.2.7.RELEASE")
-    compile("org.sitemesh:sitemesh:3.0.0")
-
-    compile("mysql:mysql-connector-java:5.1.36")
-    compile("org.flywaydb:flyway-core")
-
-    testCompile("org.springframework.boot:spring-boot-starter-test")
+  implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  implementation 'org.springframework.boot:spring-boot-starter-security'
+  implementation 'org.springframework.boot:spring-boot-starter-validation'
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation 'org.springframework.security:spring-security-taglibs'
+  implementation 'org.flywaydb:flyway-core'
+  implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+  implementation 'javax.servlet:jstl'
+  implementation 'org.sitemesh:sitemesh:3.0.0'
+  compileOnly 'org.projectlombok:lombok'
+  runtimeOnly 'mysql:mysql-connector-java'
+  annotationProcessor 'org.projectlombok:lombok'
+  providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  testImplementation 'org.springframework.security:spring-security-test'
 }
 
-
-eclipse {
-    classpath {
-         containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
-         containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
-    }
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.3'
-}
-
-task buildDocker(type: Docker, dependsOn: build) {
-  push = false
-  applicationName = jar.baseName
-  dockerfile = file('src/main/docker/Dockerfile')
-  doFirst {
-    copy {
-      from war
-      into stageDir
-    }
-  }
+tasks.named('test') {
+  useJUnitPlatform()
 }
